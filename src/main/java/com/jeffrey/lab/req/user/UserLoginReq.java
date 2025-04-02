@@ -1,4 +1,4 @@
-package com.jeffrey.lab.req;
+package com.jeffrey.lab.req.user;
 
 import javax.validation.constraints.NotEmpty;
 

@@ -1,8 +1,7 @@
-package com.jeffrey.lab.controller;
+package com.jeffrey.lab.controller.user;
 
 import com.jeffrey.lab.domain.User;
-import com.jeffrey.lab.service.UserService;
-import org.springframework.stereotype.Controller;
+import com.jeffrey.lab.service.user.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 

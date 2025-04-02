@@ -21,6 +21,7 @@
 <script>
 import { reactive } from 'vue';
 import { message } from 'ant-design-vue';
+import axios from "axios";
 
 export default {
   setup() {
@@ -30,13 +31,28 @@ export default {
     });
 
     const handleLogin = () => {
-      if (formState.username && formState.password) {
-        message.success('登录成功！');
-      } else {
-        message.error('请填写完整信息！');
-      }
+      axios.post('http/user/login', {
+        username: formState.username,
+        password: formState.password,
+      })
+          .then((resp) => {
+            if (resp.data.code === 200) {
+              message.success('登录成功！');
+              console.log("resp=", resp.data);
+              // 根据需要，可以在这里添加跳转到主页或其他逻辑
+            } else {
+              // 使用 resp 而不是 res
+              message.error(resp.data.msg || '登录失败，请重试！');
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+            // 提供用户友好的错误提示
+            message.error('请求失败，请检查网络连接或稍后再试！');
+          });
     };
 
+    // 返回响应式数据和方法，供模板使用
     return {
       formState,
       handleLogin,

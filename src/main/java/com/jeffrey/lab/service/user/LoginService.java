@@ -1,9 +1,9 @@
-package com.jeffrey.lab.service;
+package com.jeffrey.lab.service.user;
 
 import com.jeffrey.lab.domain.User;
 import com.jeffrey.lab.domain.UserExample;
 import com.jeffrey.lab.mapper.UserMapper;
-import com.jeffrey.lab.req.UserLoginReq;
+import com.jeffrey.lab.req.user.UserLoginReq;
 import com.jeffrey.lab.resp.CommonResp;
 import org.springframework.stereotype.Service;
 

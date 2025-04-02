@@ -1,4 +1,4 @@
-package com.jeffrey.lab.service;
+package com.jeffrey.lab.service.user;
 
 import com.jeffrey.lab.domain.User;
 import com.jeffrey.lab.mapper.UserMapper;

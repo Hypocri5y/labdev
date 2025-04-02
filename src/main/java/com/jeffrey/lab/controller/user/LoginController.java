@@ -1,8 +1,8 @@
-package com.jeffrey.lab.controller;
+package com.jeffrey.lab.controller.user;
 
-import com.jeffrey.lab.req.UserLoginReq;
+import com.jeffrey.lab.req.user.UserLoginReq;
 import com.jeffrey.lab.resp.CommonResp;
-import com.jeffrey.lab.service.LoginService;
+import com.jeffrey.lab.service.user.LoginService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 

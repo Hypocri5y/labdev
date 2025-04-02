@@ -1,4 +1,4 @@
-package com.jeffrey.lab.resp;
+package com.jeffrey.lab.resp.user;
 
 /**
  * @program: lab
