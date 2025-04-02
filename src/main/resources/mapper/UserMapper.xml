@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jeffrey.lab.mapper.UsersMapper">
-  <resultMap id="BaseResultMap" type="com.jeffrey.lab.domain.Users">
-    <id column="uid" jdbcType="BIGINT" property="uid" />
-    <id column="user_id" jdbcType="VARCHAR" property="userId" />
+<mapper namespace="com.jeffrey.lab.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.jeffrey.lab.domain.User">
+    <id column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="user_account" jdbcType="VARCHAR" property="userAccount" />
+    <result column="user_pwd" jdbcType="VARCHAR" property="userPwd" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="status" jdbcType="TINYINT" property="status" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="is_deleted" jdbcType="TINYINT" property="isDeleted" />
-    <result column="role" jdbcType="VARCHAR" property="role" />
+    <result column="role" jdbcType="CHAR" property="role" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -73,16 +73,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    `uid`, user_id, user_name, `password`, phone, email, `status`, create_time, update_time, 
-    is_deleted, `role`
+    user_id, user_account, user_pwd, user_name, phone, email, `status`, create_time, 
+    update_time, is_deleted, `role`
   </sql>
-  <select id="selectByExample" parameterType="com.jeffrey.lab.domain.UsersExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.jeffrey.lab.domain.UserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from users
+    from user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -90,48 +90,46 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from users
-    where `uid` = #{uid,jdbcType=BIGINT}
-      and user_id = #{userId,jdbcType=VARCHAR}
+    from user
+    where user_id = #{userId,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="map">
-    delete from users
-    where `uid` = #{uid,jdbcType=BIGINT}
-      and user_id = #{userId,jdbcType=VARCHAR}
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from user
+    where user_id = #{userId,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.jeffrey.lab.domain.UsersExample">
-    delete from users
+  <delete id="deleteByExample" parameterType="com.jeffrey.lab.domain.UserExample">
+    delete from user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.jeffrey.lab.domain.Users">
-    insert into users (`uid`, user_id, user_name, 
-      `password`, phone, email, 
+  <insert id="insert" parameterType="com.jeffrey.lab.domain.User">
+    insert into user (user_id, user_account, user_pwd, 
+      user_name, phone, email, 
       `status`, create_time, update_time, 
       is_deleted, `role`)
-    values (#{uid,jdbcType=BIGINT}, #{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
-      #{password,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+    values (#{userId,jdbcType=BIGINT}, #{userAccount,jdbcType=VARCHAR}, #{userPwd,jdbcType=VARCHAR}, 
+      #{userName,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
       #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{isDeleted,jdbcType=TINYINT}, #{role,jdbcType=VARCHAR})
+      #{isDeleted,jdbcType=TINYINT}, #{role,jdbcType=CHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.jeffrey.lab.domain.Users">
-    insert into users
+  <insert id="insertSelective" parameterType="com.jeffrey.lab.domain.User">
+    insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="uid != null">
-        `uid`,
-      </if>
       <if test="userId != null">
         user_id,
       </if>
+      <if test="userAccount != null">
+        user_account,
+      </if>
+      <if test="userPwd != null">
+        user_pwd,
+      </if>
       <if test="userName != null">
         user_name,
-      </if>
-      <if test="password != null">
-        `password`,
       </if>
       <if test="phone != null">
         phone,
@@ -156,17 +154,17 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="uid != null">
-        #{uid,jdbcType=BIGINT},
-      </if>
       <if test="userId != null">
-        #{userId,jdbcType=VARCHAR},
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userAccount != null">
+        #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="userPwd != null">
+        #{userPwd,jdbcType=VARCHAR},
       </if>
       <if test="userName != null">
         #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
       </if>
       <if test="phone != null">
         #{phone,jdbcType=VARCHAR},
@@ -187,30 +185,30 @@
         #{isDeleted,jdbcType=TINYINT},
       </if>
       <if test="role != null">
-        #{role,jdbcType=VARCHAR},
+        #{role,jdbcType=CHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.jeffrey.lab.domain.UsersExample" resultType="java.lang.Long">
-    select count(*) from users
+  <select id="countByExample" parameterType="com.jeffrey.lab.domain.UserExample" resultType="java.lang.Long">
+    select count(*) from user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update users
+    update user
     <set>
-      <if test="record.uid != null">
-        `uid` = #{record.uid,jdbcType=BIGINT},
-      </if>
       <if test="record.userId != null">
-        user_id = #{record.userId,jdbcType=VARCHAR},
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.userAccount != null">
+        user_account = #{record.userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPwd != null">
+        user_pwd = #{record.userPwd,jdbcType=VARCHAR},
       </if>
       <if test="record.userName != null">
         user_name = #{record.userName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.password != null">
-        `password` = #{record.password,jdbcType=VARCHAR},
       </if>
       <if test="record.phone != null">
         phone = #{record.phone,jdbcType=VARCHAR},
@@ -231,7 +229,7 @@
         is_deleted = #{record.isDeleted,jdbcType=TINYINT},
       </if>
       <if test="record.role != null">
-        `role` = #{record.role,jdbcType=VARCHAR},
+        `role` = #{record.role,jdbcType=CHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -239,30 +237,33 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update users
-    set `uid` = #{record.uid,jdbcType=BIGINT},
-      user_id = #{record.userId,jdbcType=VARCHAR},
+    update user
+    set user_id = #{record.userId,jdbcType=BIGINT},
+      user_account = #{record.userAccount,jdbcType=VARCHAR},
+      user_pwd = #{record.userPwd,jdbcType=VARCHAR},
       user_name = #{record.userName,jdbcType=VARCHAR},
-      `password` = #{record.password,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
       `status` = #{record.status,jdbcType=TINYINT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       is_deleted = #{record.isDeleted,jdbcType=TINYINT},
-      `role` = #{record.role,jdbcType=VARCHAR}
+      `role` = #{record.role,jdbcType=CHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.jeffrey.lab.domain.Users">
-    update users
+  <update id="updateByPrimaryKeySelective" parameterType="com.jeffrey.lab.domain.User">
+    update user
     <set>
+      <if test="userAccount != null">
+        user_account = #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="userPwd != null">
+        user_pwd = #{userPwd,jdbcType=VARCHAR},
+      </if>
       <if test="userName != null">
         user_name = #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        `password` = #{password,jdbcType=VARCHAR},
       </if>
       <if test="phone != null">
         phone = #{phone,jdbcType=VARCHAR},
@@ -283,24 +284,23 @@
         is_deleted = #{isDeleted,jdbcType=TINYINT},
       </if>
       <if test="role != null">
-        `role` = #{role,jdbcType=VARCHAR},
+        `role` = #{role,jdbcType=CHAR},
       </if>
     </set>
-    where `uid` = #{uid,jdbcType=BIGINT}
-      and user_id = #{userId,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.jeffrey.lab.domain.Users">
-    update users
-    set user_name = #{userName,jdbcType=VARCHAR},
-      `password` = #{password,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.jeffrey.lab.domain.User">
+    update user
+    set user_account = #{userAccount,jdbcType=VARCHAR},
+      user_pwd = #{userPwd,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       `status` = #{status,jdbcType=TINYINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       is_deleted = #{isDeleted,jdbcType=TINYINT},
-      `role` = #{role,jdbcType=VARCHAR}
-    where `uid` = #{uid,jdbcType=BIGINT}
-      and user_id = #{userId,jdbcType=VARCHAR}
+      `role` = #{role,jdbcType=CHAR}
+    where user_id = #{userId,jdbcType=BIGINT}
   </update>
 </mapper>

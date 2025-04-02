@@ -40,10 +40,11 @@
                              targetPackage="com.jeffrey.lab.mapper"
                              type="XMLMAPPER"/>
 
-        <table tableName="equipment"/>
+        <!--<table tableName="equipment_lab"/>-->
+        <!--<table tableName="equipment"/>-->
         <!--<table tableName="doc"/>-->
         <!--<table tableName="content"/>-->
-        <!--<table tableName="user"/>-->
+        <table tableName="user"/>
         <!--<table tableName="ebook_snapshot"/>-->
     </context>
 </generatorConfiguration>

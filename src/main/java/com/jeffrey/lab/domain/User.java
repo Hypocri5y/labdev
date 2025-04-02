@@ -2,14 +2,14 @@ package com.jeffrey.lab.domain;
 
 import java.util.Date;
 
-public class Users {
-    private Long uid;
+public class User {
+    private Long userId;
 
-    private String userId;
+    private String userAccount;
+
+    private String userPwd;
 
     private String userName;
-
-    private String password;
 
     private String phone;
 
@@ -25,20 +25,28 @@ public class Users {
 
     private String role;
 
-    public Long getUid() {
-        return uid;
-    }
-
-    public void setUid(Long uid) {
-        this.uid = uid;
-    }
-
-    public String getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public String getUserAccount() {
+        return userAccount;
+    }
+
+    public void setUserAccount(String userAccount) {
+        this.userAccount = userAccount;
+    }
+
+    public String getUserPwd() {
+        return userPwd;
+    }
+
+    public void setUserPwd(String userPwd) {
+        this.userPwd = userPwd;
     }
 
     public String getUserName() {
@@ -47,14 +55,6 @@ public class Users {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getPhone() {
@@ -119,10 +119,10 @@ public class Users {
         sb.append(getClass().getSimpleName());
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
-        sb.append(", uid=").append(uid);
         sb.append(", userId=").append(userId);
+        sb.append(", userAccount=").append(userAccount);
+        sb.append(", userPwd=").append(userPwd);
         sb.append(", userName=").append(userName);
-        sb.append(", password=").append(password);
         sb.append(", phone=").append(phone);
         sb.append(", email=").append(email);
         sb.append(", status=").append(status);
