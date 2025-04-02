@@ -36,15 +36,21 @@ export default {
         password: formState.password,
       })
           .then((resp) => {
-            if (resp.data.code === 200) {
+            console.log("resp=", resp);
+            const result = resp.data;
+            if (result.isSuccess) {
               message.success('登录成功！');
-              console.log("resp=", resp.data);
               // 根据需要，可以在这里添加跳转到主页或其他逻辑
             } else {
               // 使用 resp 而不是 res
               message.error(resp.data.msg || '登录失败，请重试！');
             }
           })
+          .catch((err) => {
+            console.error(err);
+            // 提供用户友好的错误提示
+            message.error('请求失败，请检查网络连接或稍后再试！');
+          });
     };
 
     // 返回响应式数据和方法，供模板使用
