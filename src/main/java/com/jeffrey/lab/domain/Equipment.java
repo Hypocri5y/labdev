@@ -13,13 +13,7 @@ public class Equipment {
 
     private String description;
 
-    private String price;
-
-    private Date startTime;
-
-    private Byte status;
-
-    private String labName;
+    private String status;
 
     private Date createTime;
 
@@ -69,36 +63,12 @@ public class Equipment {
         this.description = description;
     }
 
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public Date getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
-    }
-
-    public Byte getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Byte status) {
+    public void setStatus(String status) {
         this.status = status;
-    }
-
-    public String getLabName() {
-        return labName;
-    }
-
-    public void setLabName(String labName) {
-        this.labName = labName;
     }
 
     public Date getCreateTime() {
@@ -144,10 +114,7 @@ public class Equipment {
         sb.append(", equName=").append(equName);
         sb.append(", func=").append(func);
         sb.append(", description=").append(description);
-        sb.append(", price=").append(price);
-        sb.append(", startTime=").append(startTime);
         sb.append(", status=").append(status);
-        sb.append(", labName=").append(labName);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", isDeleted=").append(isDeleted);

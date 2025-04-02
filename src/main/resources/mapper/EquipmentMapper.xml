@@ -7,10 +7,7 @@
     <result column="equ_name" jdbcType="VARCHAR" property="equName" />
     <result column="func" jdbcType="VARCHAR" property="func" />
     <result column="description" jdbcType="VARCHAR" property="description" />
-    <result column="price" jdbcType="VARCHAR" property="price" />
-    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
-    <result column="status" jdbcType="TINYINT" property="status" />
-    <result column="lab_name" jdbcType="VARCHAR" property="labName" />
+    <result column="status" jdbcType="CHAR" property="status" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="is_deleted" jdbcType="TINYINT" property="isDeleted" />
@@ -75,8 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    `uid`, equ_id, equ_name, func, description, price, start_time, `status`, lab_name, 
-    create_time, update_time, is_deleted, types
+    `uid`, equ_id, equ_name, func, description, `status`, create_time, update_time, is_deleted, 
+    types
   </sql>
   <select id="selectByExample" parameterType="com.jeffrey.lab.domain.EquipmentExample" resultMap="BaseResultMap">
     select
@@ -112,13 +109,11 @@
   </delete>
   <insert id="insert" parameterType="com.jeffrey.lab.domain.Equipment">
     insert into equipment (`uid`, equ_id, equ_name, 
-      func, description, price, 
-      start_time, `status`, lab_name, 
+      func, description, `status`, 
       create_time, update_time, is_deleted, 
       types)
     values (#{uid,jdbcType=BIGINT}, #{equId,jdbcType=VARCHAR}, #{equName,jdbcType=VARCHAR}, 
-      #{func,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, 
-      #{startTime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}, #{labName,jdbcType=VARCHAR}, 
+      #{func,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{isDeleted,jdbcType=TINYINT}, 
       #{types,jdbcType=VARCHAR})
   </insert>
@@ -140,17 +135,8 @@
       <if test="description != null">
         description,
       </if>
-      <if test="price != null">
-        price,
-      </if>
-      <if test="startTime != null">
-        start_time,
-      </if>
       <if test="status != null">
         `status`,
-      </if>
-      <if test="labName != null">
-        lab_name,
       </if>
       <if test="createTime != null">
         create_time,
@@ -181,17 +167,8 @@
       <if test="description != null">
         #{description,jdbcType=VARCHAR},
       </if>
-      <if test="price != null">
-        #{price,jdbcType=VARCHAR},
-      </if>
-      <if test="startTime != null">
-        #{startTime,jdbcType=TIMESTAMP},
-      </if>
       <if test="status != null">
-        #{status,jdbcType=TINYINT},
-      </if>
-      <if test="labName != null">
-        #{labName,jdbcType=VARCHAR},
+        #{status,jdbcType=CHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -231,17 +208,8 @@
       <if test="record.description != null">
         description = #{record.description,jdbcType=VARCHAR},
       </if>
-      <if test="record.price != null">
-        price = #{record.price,jdbcType=VARCHAR},
-      </if>
-      <if test="record.startTime != null">
-        start_time = #{record.startTime,jdbcType=TIMESTAMP},
-      </if>
       <if test="record.status != null">
-        `status` = #{record.status,jdbcType=TINYINT},
-      </if>
-      <if test="record.labName != null">
-        lab_name = #{record.labName,jdbcType=VARCHAR},
+        `status` = #{record.status,jdbcType=CHAR},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -267,10 +235,7 @@
       equ_name = #{record.equName,jdbcType=VARCHAR},
       func = #{record.func,jdbcType=VARCHAR},
       description = #{record.description,jdbcType=VARCHAR},
-      price = #{record.price,jdbcType=VARCHAR},
-      start_time = #{record.startTime,jdbcType=TIMESTAMP},
-      `status` = #{record.status,jdbcType=TINYINT},
-      lab_name = #{record.labName,jdbcType=VARCHAR},
+      `status` = #{record.status,jdbcType=CHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       is_deleted = #{record.isDeleted,jdbcType=TINYINT},
@@ -291,17 +256,8 @@
       <if test="description != null">
         description = #{description,jdbcType=VARCHAR},
       </if>
-      <if test="price != null">
-        price = #{price,jdbcType=VARCHAR},
-      </if>
-      <if test="startTime != null">
-        start_time = #{startTime,jdbcType=TIMESTAMP},
-      </if>
       <if test="status != null">
-        `status` = #{status,jdbcType=TINYINT},
-      </if>
-      <if test="labName != null">
-        lab_name = #{labName,jdbcType=VARCHAR},
+        `status` = #{status,jdbcType=CHAR},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -324,10 +280,7 @@
     set equ_name = #{equName,jdbcType=VARCHAR},
       func = #{func,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},
-      price = #{price,jdbcType=VARCHAR},
-      start_time = #{startTime,jdbcType=TIMESTAMP},
-      `status` = #{status,jdbcType=TINYINT},
-      lab_name = #{labName,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=CHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       is_deleted = #{isDeleted,jdbcType=TINYINT},
